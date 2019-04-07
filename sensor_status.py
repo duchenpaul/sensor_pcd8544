@@ -16,7 +16,7 @@ REFRESH_INTERVAL = int(config['SETTING']['REFRESH_INTERVAL'])
 
 disp = show_in_LCD.PCD8544_Display(**show_in_LCD.get_config(config_file))
 
-backlight_ctrl.backlight_ctrl(50)
+backlight_ctrl.backlight_toggle(True)
 
 while True:
     t1 = time.time()
