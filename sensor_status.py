@@ -16,7 +16,7 @@ disp = show_in_LCD.PCD8544_Display(**show_in_LCD.get_config(config_file))
 
 while True:
     t1 = time.time()
-    image = image_generate.draw_image((LCDWIDTH, LCDHEIGHT), image_generate.gather_sys_info())
+    image = image_generate.draw_image((LCDWIDTH, LCDHEIGHT), image_generate.get_BME280())
     disp.display_image(image_generate.invert_color(image))
     t2 = time.time()
     # Remove the running time to make sure it takes exactly <<REFRESH_INTERVAL>> sec every time 
