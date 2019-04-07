@@ -18,4 +18,4 @@
 **/*.out
 
 *test*
-config.ini
+# config.ini
