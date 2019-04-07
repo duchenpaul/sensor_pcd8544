@@ -1,0 +1,4 @@
+psutil==5.4.7
+pandas==0.23.4
+Adafruit_GPIO==1.0.3
+Pillow==5.3.0
