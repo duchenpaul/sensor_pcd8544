@@ -19,9 +19,15 @@ LCDWIDTH, LCDHEIGHT = 84, 48
 
 def get_BME280():
     url = 'http://' + config['SETTING']['NODEMCU_IP'] + '/bme280'
-    resp = requests.get(url).text
-    senorDataDict = json.loads(resp)
-    return senorDataDict
+    try:
+        resp = requests.get(url, timeout=3).text
+    except requests.exceptions.Timeout as e:
+        return None
+    else:
+        senorDataDict = json.loads(resp)
+        return senorDataDict
+    
+    
 
 
 def draw_image(size, data):
@@ -39,10 +45,14 @@ def draw_image(size, data):
     # Draw a white filled box to clear the image.
     draw.rectangle((0, 0, size), outline=255, fill=255)
 
+    temp_value = data['temperature'] if data else '--'
+    humi_value = round(data['humidity'], 2) if data else '--'
+    pres_value = round(data['pressure'], 2) if data else '--'
+
     draw.text((2, 0), "{}".format(time.strftime("%H:%M:%S", time.localtime())), font=font)
-    draw.text((2, 10), "Temp: {}'C".format(data['temperature']), font=font)
-    draw.text((2, 20), "Humi: {}%".format(round(data['humidity'], 2)), font=font)
-    draw.text((2, 30), "Pres:{}hPa".format(round(data['pressure'], 2)), font=font)
+    draw.text((2, 10), "Temp: {}'C".format(temp_value), font=font)
+    draw.text((2, 20), "Humi: {}%".format(humi_value), font=font)
+    draw.text((2, 30), "Pres:{}hPa".format(pres_value), font=font)
     return image
 
 
