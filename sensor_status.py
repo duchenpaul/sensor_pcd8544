@@ -5,6 +5,8 @@ import image_generate
 import show_in_LCD
 import read_config
 
+import backlight_ctrl
+
 config_file = 'config.ini'
 
 config = read_config.read_config_general(configFile=config_file)
@@ -13,6 +15,8 @@ LCDWIDTH, LCDHEIGHT = int(config['SCREEN']['LCDWIDTH']), int(config['SCREEN']['L
 REFRESH_INTERVAL = int(config['SETTING']['REFRESH_INTERVAL'])
 
 disp = show_in_LCD.PCD8544_Display(**show_in_LCD.get_config(config_file))
+
+backlight_ctrl.backlight_ctrl(50)
 
 while True:
     t1 = time.time()
