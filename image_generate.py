@@ -26,8 +26,8 @@ def get_BME280():
     except Exception as e:
         pass
     else:
-        senorDataDict = json.loads(resp)
-        return senorDataDict
+        sensorDataDict = json.loads(resp)
+        return sensorDataDict
     
     
 
